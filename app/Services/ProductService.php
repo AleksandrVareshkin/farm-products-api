@@ -37,7 +37,10 @@ class ProductService
             $query->where('quantity', $inStock ? '>' : '=', 0);
         }
 
-        return $query->get();
+        // Paginate the results
+        $products = $query->paginate(10);
+
+        return response()->json($products);
     }
 
     /**
